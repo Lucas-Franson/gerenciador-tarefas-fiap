@@ -63,5 +63,19 @@ input, select{
     }
 }
 
+@media screen and (min-width: $mediaQueryDesktop) {
+    input, select {
+        border-radius: 8px;
+        border-width: 1px;
+        padding: 5px;
+    }
+}
+
+
 @import './login.scss';
 @import './header.scss';
+@import './footer.scss';
+@import './filter.scss';
+@import './list.scss';
+@import './item.scss';
+@import './modal.scss';
