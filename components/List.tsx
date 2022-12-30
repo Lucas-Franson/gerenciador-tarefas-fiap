@@ -49,7 +49,7 @@ export const List: NextPage<ListProps> = ({ tasks, getFilteredData }) => {
             if(finishDate){
                 body.finishDate = finishDate;
             }
-
+            
             await executeRequest('task?id='+_id, 'PUT', body);
             await getFilteredData();
             closeModal();
@@ -91,7 +91,7 @@ export const List: NextPage<ListProps> = ({ tasks, getFilteredData }) => {
         setErrorMsg('');
         setId(task._id);
         setName(task.name);
-        setFinishPrevisionDate(moment(task.finishPrevisionDate).format('yyyy-MM-DD'));
+        setFinishPrevisionDate(moment(task.finishPrevisionDate.replace(/-/g, '\/').replace(/T.+/, '')).format('yyyy-MM-DD'));
     }
 
     return (
@@ -115,10 +115,14 @@ export const List: NextPage<ListProps> = ({ tasks, getFilteredData }) => {
                     {errorMsg && <p className="error">{errorMsg}</p>}
                     <input type="text" placeholder="Nome da tarefa"
                         value={name} onChange={e => setName(e.target.value)} />
-                    <input type="date" placeholder="Previsão de conclusão"
-                        value={finishPrevisionDate} onChange={e => setFinishPrevisionDate(e.target.value)} />
-                    <input type="date" placeholder="Data de conclusão"
-                        value={finishDate} onChange={e => setFinishDate(e.target.value)} />
+                    <input type="text" placeholder="Previsão de conclusão"
+                        value={finishPrevisionDate} onChange={e => setFinishPrevisionDate(e.target.value)}
+                        onFocus={(e) => (e.target.type = "date")}
+                        onBlur={(e) => (e.target.type = "text")} />
+                    <input type="text" placeholder="Data de conclusão"
+                        value={finishDate} onChange={e => setFinishDate(e.target.value)} 
+                        onFocus={(e) => (e.target.type = "date")}
+                        onBlur={(e) => (e.target.type = "text")}/>
                 </Modal.Body>
                 <Modal.Footer>
                     <div className="button col-12">

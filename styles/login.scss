@@ -54,7 +54,14 @@
             border-radius: 12px;
             font-size: 16px;
             margin-top: 15px;
+
         }
+        
+        button.register-button {
+            height: 42px;
+            background-color: #d63b77;
+        }
+
     }
 
     @media screen and (min-width: $mediaQueryDesktop) {

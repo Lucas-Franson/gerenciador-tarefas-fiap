@@ -136,6 +136,7 @@ const validateTaskAndReturnValue = async (req: NextApiRequest, userId: string) =
 
 const updateTask = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgResponse | Task[]>, userId: string) => {
     const taskFound = await validateTaskAndReturnValue(req, userId);
+    
     if (!taskFound) {
         return res.status(400).json({ error: 'Tarefa nao encontrada' });
     }
@@ -150,11 +151,11 @@ const updateTask = async (req: NextApiRequest, res: NextApiResponse<DefaultMsgRe
         if (task.finishPrevisionDate) {
             taskFound.finishPrevisionDate = task.finishPrevisionDate;
         }
-
+        
         if (task.finishDate) {
             taskFound.finishDate = task.finishDate;
         }
-
+        
         await TaskModel.findByIdAndUpdate({ _id: taskFound._id }, taskFound);
         return res.status(200).json({ message: 'Tarefa atualizada com sucesso' });
     }
