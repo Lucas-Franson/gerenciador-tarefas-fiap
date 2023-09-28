@@ -16,5 +16,10 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    npm install
+    npm ci
   displayName: 'npm install and build'
+  
+
+- script: |
+    echo test
+  displayName: 'npm test project'
